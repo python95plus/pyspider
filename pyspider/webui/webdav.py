@@ -164,13 +164,13 @@ class RootCollection(DAVCollection):
 
 class ScriptProvider(DAVProvider):
     def __init__(self, app):
-        super(ScriptProvider, self).__init__()
+        super().__init__()
         self.app = app
 
     def __repr__(self):
         return "pyspiderScriptProvider"
 
-    def getResourceInst(self, path, environ):
+    def get_resource_inst(self, path, environ):
         path = os.path.normpath(path).replace('\\', '/')
         if path in ('/', '.', ''):
             path = '/'
@@ -206,10 +206,13 @@ config.update({
     'provider_mapping': {
         '/': ScriptProvider(app)
     },
-    'domaincontroller': NeedAuthController(app),
+    # 'domaincontroller': NeedAuthController(app),
+    'http_authenticator' :{
+        'HTTPAuthenticator' : NeedAuthController(app),
+    },
     'verbose': 1 if app.debug else 0,
     'dir_browser': {'davmount': False,
-                    'enable': True,
+                    # 'enable': True,
                     'msmount': False,
                     'response_trailer': ''},
 })

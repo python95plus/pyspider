@@ -108,11 +108,11 @@ class BaseHandlerMeta(type):
         # Scheudler may only send _on_cronjob task every min_tick seconds. It can reduce
         # the number of tasks sent from scheduler.
         min_tick = 0
-
+        import math
         for each in attrs.values():
             if inspect.isfunction(each) and getattr(each, 'is_cronjob', False):
                 cron_jobs.append(each)
-                min_tick = fractions.gcd(min_tick, each.tick)
+                min_tick = math.gcd(min_tick, each.tick)
         newcls = type.__new__(cls, name, bases, attrs)
         newcls._cron_jobs = cron_jobs
         newcls._min_tick = min_tick

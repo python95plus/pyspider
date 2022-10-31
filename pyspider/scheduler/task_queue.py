@@ -13,7 +13,7 @@ import time
 try:
     from UserDict import DictMixin
 except ImportError:
-    from collections import Mapping as DictMixin
+    from collections.abc import Mapping as DictMixin
 from .token_bucket import Bucket
 from six.moves import queue as Queue
 
