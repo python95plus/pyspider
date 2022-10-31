@@ -18,19 +18,19 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 import pyspider
 
 install_requires = [
-    'Flask==0.10',
-    'Jinja2==2.7',
-    'chardet==3.0.4',
-    'cssselect==0.9',
-    "lxml==4.3.3",
-    'pycurl==7.43.0.3',
-    'requests==2.24.0',
-    'Flask-Login==0.2.11',
-    'u-msgpack-python==1.6',
-    'click==3.3',
-    'six==1.10.0',
-    'tblib==1.4.0',
-    'wsgidav==2.3.0',
+    'Flask==2.2.2',
+    'Jinja2==3.1.2',
+    'chardet==5.0.0',
+    'cssselect==1.2.0',
+    # "lxml==4.9.0", # 手动安装
+    # 'pycurl==7.45.1', # 手动安装
+    'requests==2.28.1',
+    'Flask-Login==0.6.2',
+    'u-msgpack-python==2.7.1',
+    'click==8.1.3',
+    'six==1.16.0',
+    'tblib==1.7.0',
+    'wsgidav==4.0.2',
     'tornado>=3.2,<=4.5.3',
     'pyquery',
 ]
@@ -89,7 +89,7 @@ setup(
         'all': extras_require_all,
         'test': [
             'coverage',
-            'Werkzeug==0.16.1',
+            'Werkzeug==2.2.2',
             'httpbin==0.7.0',
             'pyproxy==0.1.6',
             'easywebdav==1.2.0',
