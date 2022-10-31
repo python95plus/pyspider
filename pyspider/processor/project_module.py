@@ -186,7 +186,16 @@ class ProjectLoader(object):
         return compile(self.get_source(fullname), '<%s>' % self.name, 'exec')
 
     def get_source(self, fullname):
-        script = self.project['script']
+        code_path = os.path.join(os.getcwd(), "code", f"{fullname}.py")
+        script = None
+        if os.path.exists(code_path):
+            try:
+                with open(code_path, 'r', encoding='utf-8') as Code_File:
+                    script = Code_File.read()
+            except Exception as e:
+                print(e)
+        else:
+            script = self.project['script']
         if isinstance(script, six.text_type):
             return script.encode('utf8')
         return script
