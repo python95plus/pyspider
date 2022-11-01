@@ -10,6 +10,7 @@ import sys
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
+from site import getsitepackages
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -115,3 +116,16 @@ setup(
 
     test_suite='tests.all_suite',
 )
+
+packages = getsitepackages()
+site_path =[item for item in packages if item.find('site-packages')> 0][0]
+
+tornado_path = path.join(site_path, 'tornado', 'httputil.py')
+if path.exists(tornado_path):
+    content = None
+    with open(tornado_path, 'r', encoding='utf-8-sig') as source_file:
+        content = source_file.read()
+        content = content.replace('collections.MutableMapping', 'collections.abc.MutableMapping')
+    if content:
+        with open(tornado_path, 'w', encoding='utf-8-sig') as source_file:
+            source_file.write(content)
