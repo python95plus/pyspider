@@ -119,13 +119,17 @@ setup(
 
 packages = getsitepackages()
 site_path =[item for item in packages if item.find('site-packages')> 0][0]
-
+print(site_path)
 tornado_path = path.join(site_path, 'tornado', 'httputil.py')
 if path.exists(tornado_path):
     content = None
     with open(tornado_path, 'r', encoding='utf-8-sig') as source_file:
         content = source_file.read()
+        print("执行替换")
         content = content.replace('collections.MutableMapping', 'collections.abc.MutableMapping')
+
     if content:
+        print("开始执行")
         with open(tornado_path, 'w', encoding='utf-8-sig') as source_file:
             source_file.write(content)
+            print("执行成功")
