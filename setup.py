@@ -32,7 +32,7 @@ install_requires = [
     'six==1.16.0',
     'tblib==1.7.0',
     'wsgidav==4.0.2',
-    'tornado>=3.2,<=4.5.3',
+    'tornado>=6.0',
     'pyquery',
 ]
 
@@ -117,19 +117,19 @@ setup(
     test_suite='tests.all_suite',
 )
 
-packages = getsitepackages()
-site_path =[item for item in packages if item.find('site-packages')> 0][0]
-print(site_path)
-tornado_path = path.join(site_path, 'tornado', 'httputil.py')
-if path.exists(tornado_path):
-    content = None
-    with open(tornado_path, 'r', encoding='utf-8-sig') as source_file:
-        content = source_file.read()
-        print("执行替换")
-        content = content.replace('collections.MutableMapping', 'collections.abc.MutableMapping')
+# packages = getsitepackages()
+# site_path =[item for item in packages if item.find('site-packages')> 0][0]
+# print(site_path)
+# tornado_path = path.join(site_path, 'tornado', 'httputil.py')
+# if path.exists(tornado_path):
+#     content = None
+#     with open(tornado_path, 'r', encoding='utf-8-sig') as source_file:
+#         content = source_file.read()
+#         print("执行替换")
+#         content = content.replace('collections.MutableMapping', 'collections.abc.MutableMapping')
 
-    if content:
-        print("开始执行")
-        with open(tornado_path, 'w', encoding='utf-8-sig') as source_file:
-            source_file.write(content)
-            print("执行成功")
+#     if content:
+#         print("开始执行")
+#         with open(tornado_path, 'w', encoding='utf-8-sig') as source_file:
+#             source_file.write(content)
+#             print("执行成功")
